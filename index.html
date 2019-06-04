@@ -11,13 +11,19 @@
     <header>
         <h1>This is the Study Helper</h1>
     </header>
-    <form action="submit">
+    <form class="textForm" action="submit">
         <span>Please enter the text that you want to reduce to a more concise from</span>
         <textarea rows = "20" name = "description">
                 Enter text here...
              </textarea><br>
              <input class="submitButton" type = "submit" value = "Analize" />
     </form>
+    <div class="resultsDisplayContainer">
+        <button class="displayResultsButton">Show Results</button>
+        <div class="resultsDisplay">
+            
+        </div>
+    </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="index.js"></script>

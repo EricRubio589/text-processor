@@ -31,3 +31,24 @@ textarea {
     height: 50px;
     margin-top: 15px;
 }
+
+
+.resultsDisplayContainer {
+    margin-top: 15px;
+    width: 50%;
+    display: flex;
+    flex-flow: column;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.displayResultsButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 50px;
+}
