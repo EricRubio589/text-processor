@@ -1,6 +1,7 @@
 
 const NLP_API_KEY = 'AIzaSyBy9CeoxXbMk-1CNSOOBn-ATQMPP-yayMs';
-const NLP_API_AES_URL = 'https://language.googleapis.com/v1beta2/documents:analyzeSentiment';
+const NLP_API_URL = 'https://language.googleapis.com/v1beta2/documents:';
+const NLP_METHOD = 'analyzeSentiment';
 var answerArray;
 
 
@@ -17,7 +18,7 @@ function analyzeEntitySentiment(text){
     encodingType: 'UTF16'
   }
 
-  fetch (NLP_API_AES_URL + '?key=' + NLP_API_KEY, {
+  fetch (NLP_API_URL + NLP_METHOD + '?key=' + NLP_API_KEY, {
     method: 'POST',
     mode: 'cors',
     body: JSON.stringify(payload)
