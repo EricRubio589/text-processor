@@ -2,7 +2,6 @@
 const NLP_API_KEY = 'AIzaSyBy9CeoxXbMk-1CNSOOBn-ATQMPP-yayMs';
 const NLP_API_URL = 'https://language.googleapis.com/v1beta2/documents:';
 const NLP_METHOD = 'analyzeSentiment';
-var answerArray;
 
 
 function analyzeEntitySentiment(text){
@@ -57,14 +56,14 @@ function listenForDisplayResultsSubmit(data) {
 
     $('.displayResultsButton').click(function handleData(event) {
         event.preventDefault();
-        console.log(data.sentences[0].text.content);
-        /*console.log('Show results is working');
+        console.log(data);
+        /*console.log('Show results is working');*/
         let reducedText;
-         for (let i=0; i < answerArray.length; i++) {
-            if (answerArray.sentences.text[i].sentiment.score >= 0.1);
-            reducedText += answerArray.sentences.text[i].content;
+         for (let i=0; i < data.length; i++) {
+            if (data.sentences[i].sentiment.score.val() >= 0.1);
+            reducedText += data.sentences[i].text.content;
          }
-        $('.resultsDisplay').append(`<div>${reducedText}</div>`).val();*/
+        $('.resultsDisplay').append(`<div>${reducedText}</div>`).val();
     });
 }
 
