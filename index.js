@@ -28,10 +28,12 @@ function analyzeEntitySentiment(text){
       return res.json();
     }
   })
-  .then(json => {
+  .then(json => listenForDisplayResultsSubmit(json))
+    /*
+    answerArray = res.json();
     answerArray = JSON.stringify(json); 
     console.log('Received from server:', JSON.stringify(json));
-  })
+  })*/
   ;
 
 }
@@ -41,12 +43,12 @@ function listenForFormSubmit() {
         event.preventDefault();
         var corpus = $('textarea').val();
         analyzeEntitySentiment(corpus);
-        console.log('this is the answerArray', answerArray);
+        /*console.log('this is the answerArray', answerArray);*/
     })
 
 }
 
-function listenForDisplayResultsSubmit() {
+function listenForDisplayResultsSubmit(data) {
     /*$('.resultsDisplayContainer').on('click', '.displayResultsButton', function handleData(event) {
     event.preventDefault();
     console.log('Show results is working') 
@@ -55,16 +57,17 @@ function listenForDisplayResultsSubmit() {
 
     $('.displayResultsButton').click(function handleData(event) {
         event.preventDefault();
-        console.log('Show results is working');
+        console.log(data.sentences[0].text.content);
+        /*console.log('Show results is working');
         let reducedText;
          for (let i=0; i < answerArray.length; i++) {
-            if (answerArray.sentences[0].text[i].sentiment.score >= 0.1);
+            if (answerArray.sentences.text[i].sentiment.score >= 0.1);
             reducedText += answerArray.sentences.text[i].content;
          }
-        $('.resultsDisplay').append(`<div>${reducedText}</div>`).val();
+        $('.resultsDisplay').append(`<div>${reducedText}</div>`).val();*/
     });
 }
 
 
 listenForFormSubmit();
-listenForDisplayResultsSubmit();
+/*listenForDisplayResultsSubmit();*/
