@@ -1,7 +1,7 @@
 
 const NLP_API_KEY = 'AIzaSyBy9CeoxXbMk-1CNSOOBn-ATQMPP-yayMs';
 const NLP_API_URL = 'https://language.googleapis.com/v1beta2/documents:';
-const NLP_METHOD = 'analyzeSentiment';
+const NLP_METHOD = 'annotateText';
 
 
 function analyzeEntitySentiment(text){
@@ -12,8 +12,17 @@ function analyzeEntitySentiment(text){
     content: text
   }
 
+  let features = {
+    "extractSyntax": true,
+    "extractEntities": true,
+    "extractDocumentSentiment": true,
+    "extractEntitySentiment": true,
+    "classifyText": true
+  }
+
   let payload = {
     document,
+    features,
     encodingType: 'UTF16'
   }
 
@@ -22,19 +31,14 @@ function analyzeEntitySentiment(text){
     mode: 'cors',
     body: JSON.stringify(payload)
   })
+
   .then(res => {
     if( res.ok ){
       return res.json();
     }
   })
-  .then(json => listenForDisplayResultsSubmit(json))
-    /*
-    answerArray = res.json();
-    answerArray = JSON.stringify(json); 
-    console.log('Received from server:', JSON.stringify(json));
-  })*/
-  ;
 
+  .then(json => listenForDisplayResultsSubmit(json));
 }
 
 function listenForFormSubmit() {
@@ -42,29 +46,26 @@ function listenForFormSubmit() {
         event.preventDefault();
         var corpus = $('textarea').val();
         analyzeEntitySentiment(corpus);
-        /*console.log('this is the answerArray', answerArray);*/
     })
 
 }
 
 function listenForDisplayResultsSubmit(data) {
-    /*$('.resultsDisplayContainer').on('click', '.displayResultsButton', function handleData(event) {
-    event.preventDefault();
-    console.log('Show results is working') 
-    $('.resultsDisplay').append(answerArray).val();    
-    });*/
+  $('.displayResultsButton').click(function handleData(event) {
+      event.preventDefault();
+      var reducedText = [];
+        for (let i=0; i < Object.keys(data.sentences).length; i++) {
+          if ((data.sentences[i].sentiment.score * 100) >= 50 
+          || (data.sentences[i].sentiment.score * 100) <= -50) 
+          {
+            reducedText.push(data.sentences[i].text.content + " ");
+            console.log(i); 
+          }
+        }
 
-    $('.displayResultsButton').click(function handleData(event) {
-        event.preventDefault();
-        console.log(data);
-        /*console.log('Show results is working');*/
-        let reducedText;
-         for (let i=0; i < data.length; i++) {
-            if (data.sentences[i].sentiment.score.val() >= 0.1);
-            reducedText += data.sentences[i].text.content;
-         }
-        $('.resultsDisplay').append(`<div>${reducedText}</div>`).val();
-    });
+      $('.resultsDisplay').append(`<div>${reducedText}</div>`).val();
+      console.log(data);
+  });
 }
 
 
