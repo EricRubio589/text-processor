@@ -52,3 +52,12 @@ textarea {
     width: 50%;
     height: 50px;
 }
+
+.resultsDisplay {
+    margin-top: 20px;
+}
+
+.resultsList {
+    display: none;
+    margin-left: 5px;
+}

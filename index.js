@@ -54,7 +54,8 @@ function listenForDisplayResultsSubmit(data) {
   $('.displayResultsButton').click(function handleData(event) {
       event.preventDefault();
       var reducedText = [];
-        for (let i=0; i < Object.keys(data.sentences).length; i++) {
+
+        /*for (let i=0; i < Object.keys(data.sentences).length; i++) {
           if ((data.sentences[i].sentiment.score * 100) >= 50 
           || (data.sentences[i].sentiment.score * 100) <= -50) 
           {
@@ -62,7 +63,19 @@ function listenForDisplayResultsSubmit(data) {
             console.log(i); 
           }
         }
+        */
+        for (let i=0; i < Object.keys(data.entities).length; i++) {
 
+          if ((data.entities[i].salience * 100) >= 1) {
+            for (let i=0; i < Object.keys(data.sentences).length; i++)
+          } 
+
+          if ("wikipedia_url" in data.entities[i].metadata && (data.entities[i].salience * 100) >= 1) {
+            $('.resultsList').show();
+            $('.resultsList').append(`<li><a href="${data.entities[i].metadata.wikipedia_url}" target="_blank">${data.entities[i].name}</a></li>`)
+          }
+        }
+        
       $('.resultsDisplay').append(`<div>${reducedText}</div>`).val();
       console.log(data);
   });
@@ -70,4 +83,3 @@ function listenForDisplayResultsSubmit(data) {
 
 
 listenForFormSubmit();
-/*listenForDisplayResultsSubmit();*/
