@@ -2,7 +2,7 @@
 const NLP_API_KEY = 'AIzaSyBy9CeoxXbMk-1CNSOOBn-ATQMPP-yayMs';
 const NLP_API_URL = 'https://language.googleapis.com/v1beta2/documents:';
 const NLP_METHOD = 'annotateText';
-var entitiesWithEnoughSalience = [];
+/*var entitiesWithEnoughSalience = [];*/
 
 
 function analyzeEntitySentiment(text){
@@ -61,7 +61,7 @@ function getEntitiesWithSalience(array) {
   return filterSentencesWithSalienceWords(salientEntities,array.sentences);
 }
 
-function filterSentencesWithSalienceWords(words,sentences) {
+/*function filterSentencesWithSalienceWords(words,sentences) {
   let reducedText = [];
   let entitiesAlreadyUsed = [];
   for(let i=0; i < Object.keys(sentences).length; i++) {
@@ -76,7 +76,16 @@ function filterSentencesWithSalienceWords(words,sentences) {
     }  
   } 
   return reducedText;
+}*/
+
+function filterSentencesWithSalienceWords(words,sentences) {
+  /*let reducedText = [];*/
+  /*let entitiesAlreadyUsed = [];*/
+  let reducedText = sentences.filter(sentence => sentence.includes(words.filter(word => sentences.includes(word))))
+  console.log(sentences)
+  return reducedText
 }
+
 
 //this is the function that runs after clicking on analize, it calls getEntitiesWithSalience//
 /*function listenForDisplayResultsSubmit(data) {*/
