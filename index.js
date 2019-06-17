@@ -3,7 +3,6 @@ const NLP_API_KEY = 'AIzaSyBy9CeoxXbMk-1CNSOOBn-ATQMPP-yayMs';
 const NLP_API_URL = 'https://language.googleapis.com/v1beta2/documents:';
 const NLP_METHOD = 'annotateText';
 var entitiesWithEnoughSalience = [];
-var reducedText = [];
 
 
 function analyzeEntitySentiment(text){
@@ -40,7 +39,7 @@ function analyzeEntitySentiment(text){
     }
   })
 
-  .then(json => listenForDisplayResultsSubmit(json));
+  .then(json => handleAPIData(json));
 }
 
 function listenForFormSubmit() {
@@ -53,34 +52,36 @@ function listenForFormSubmit() {
 }
 
 function getEntitiesWithSalience(array) {
+  let salientEntities = [];
   for (let i=0; i < Object.keys(array.entities).length; i++ ) {
     if ((array.entities[i].salience * 100) >= 2) {
-    entitiesWithEnoughSalience.push(array.entities[i].name)
+    salientEntities.push(array.entities[i].name)
     }
   }
-  filterSentencesWithSalienceWords(entitiesWithEnoughSalience,array);
+  return filterSentencesWithSalienceWords(salientEntities,array.sentences);
 }
 
-function filterSentencesWithSalienceWords(words,array) {
+function filterSentencesWithSalienceWords(words,sentences) {
+  let reducedText = [];
   let entitiesAlreadyUsed = [];
-  for(let i=0; i < Object.keys(array.sentences).length; i++) {
+  for(let i=0; i < Object.keys(sentences).length; i++) {
     for (let j=0; j < words.length; j++) {
-      if (array.sentences[i].text.content.includes(words[j]) 
-      && !reducedText.includes(array.sentences[i].text.content) 
+      if (sentences[i].text.content.includes(words[j]) 
+      && !reducedText.includes(sentences[i].text.content) 
       && !entitiesAlreadyUsed.includes(words[j])) {
-        console.log(entitiesWithEnoughSalience);
-        reducedText.push(array.sentences[i].text.content);
+        console.log(words);
+        reducedText.push(sentences[i].text.content);
         entitiesAlreadyUsed.push(words[j]);
       }
     }  
   } 
+  return reducedText;
 }
 
 //this is the function that runs after clicking on analize, it calls getEntitiesWithSalience//
-function listenForDisplayResultsSubmit(data) {
-  $('.displayResultsButton').click(function handleData(event) {
-    event.preventDefault();
-    getEntitiesWithSalience(data)
+/*function listenForDisplayResultsSubmit(data) {*/
+function handleAPIData(data) {
+    const reducedText = getEntitiesWithSalience(data)
     for (let i=0; i < Object.keys(data.entities).length; i++) {
       if ("wikipedia_url" in data.entities[i].metadata && (data.entities[i].salience * 100) >= 1) {
         $('.resultsList').show();
@@ -88,9 +89,8 @@ function listenForDisplayResultsSubmit(data) {
       }
     }
     $('.resultsDisplay').append(`<div>${reducedText}</div>`).val();
-    console.log(reducedText);
-  });
+    console.log(data);
 }
 
 
-listenForFormSubmit();
+$(listenForFormSubmit);
