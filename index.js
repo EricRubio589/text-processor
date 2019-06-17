@@ -81,7 +81,12 @@ function getEntitiesWithSalience(array) {
 function filterSentencesWithSalienceWords(words,sentences) {
   /*let reducedText = [];*/
   /*let entitiesAlreadyUsed = [];*/
-  let reducedText = sentences.filter(sentence => sentence.includes(words.filter(word => sentences.includes(word))))
+  let reducedText = sentences.filter()
+
+  /*function callBack(sentence) {
+    return words.
+  }*/
+
   console.log(sentences)
   return reducedText
 }
