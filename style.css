@@ -57,12 +57,17 @@ textarea {
     margin-top: 20px;
 }
 
-.resultsList {
-    display: none;
+.listAndMeasureContainer {
+    display: flex;
+    flex-flow: row;
+    width: 100%;
+}
+
+.resultsListContainer {
     width: 50%;
-    margin-left: 5px;
-    left: 0;
-    flex-flow: column;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
 }
 
 .resultsList li {
@@ -74,4 +79,20 @@ textarea {
     font-size: 25px;
     margin-bottom: 25px;
     flex-flow: row;
+}
+
+.gaugeImageContainer {
+    display: none;
+    width: 50%;
+    margin-top:30px;
+    margin-bottom: 30px;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gaugeImageContainer img {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 15px;
 }

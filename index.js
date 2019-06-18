@@ -98,7 +98,9 @@ function handleAPIData(data) {
         $('.resultsList').append(`<li><a href="${data.entities[i].metadata.wikipedia_url}" target="_blank">${data.entities[i].name}</a></li>`)
       }
     }
-    calculateReductionPercentage(reducedText)
+    const articleSentiment = (data.documentSentiment.score) * 10;
+    calculateReductionPercentage(reducedText);
+    displayArticleSentiment(articleSentiment);
     $('.resultsDisplay').append(`<div>${reducedText}</div>`).val();
     console.log(data);
 }
@@ -110,6 +112,30 @@ function handleAPIData(data) {
     let percentageReduced = 100 - (Math.round((stringReducedText * 100) / stringInputText));
     $('.displayReduction').show();
     $('.displayReduction').append(`<div>Original text reduced by ${percentageReduced}%</div>`);
+  }
+
+
+  function displayArticleSentiment(sentimentValue) {
+    $('.gaugeImageContainer').css('display','flex');
+    if(sentimentValue === 0) {
+      $('.gaugeImageContainer').append(`<img src="media/img/gauge0.png" alt="Sentiment measurement for the analized article">`);
+      $('.gaugeImageContainer').append('<span>The article\'s sentiment is neutral</span>');
+    } else if(sentimentValue === 1 || sentimentValue === 2) {
+      $('.gaugeImageContainer').append(`<img src="media/img/gauge+1.png" alt="Sentiment measurement for the analized article">`);
+      $('.gaugeImageContainer').append('<span>The article\'s sentiment is slightly positive</span>')
+    } else if(sentimentValue === 3 || sentimentValue === 4) {
+      $('.gaugeImageContainer').append(`<img src="media/img/gauge+2.png" alt="Sentiment measurement for the analized article">`);
+      $('.gaugeImageContainer').append('<span>The article\'s sentiment is positive</span>')
+    } else if(sentimentValue === 5 || sentimentValue === 6) {
+      $('.gaugeImageContainer').append(`<img src="media/img/gauge+3.png" alt="Sentiment measurement for the analized article">`);
+      $('.gaugeImageContainer').append('<span>The article\'s sentiment is quite positive</span>')
+    } else if(sentimentValue === 7 || sentimentValue === 8) {
+      $('.gaugeImageContainer').append(`<img src="media/img/gauge+4.png" alt="Sentiment measurement for the analized article">`);
+      $('.gaugeImageContainer').append('<span>The article\'s sentiment is very positive</span>')
+    } else if(sentimentValue === 9 || sentimentValue === 10) {
+      $('.gaugeImageContainer').append(`<img src="media/img/gauge+5.png" alt="Sentiment measurement for the analized article">`);
+      $('.gaugeImageContainer').append('<span>The article\'s sentiment is extremely positive</span>')
+    }
   }
 
 
