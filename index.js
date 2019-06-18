@@ -2,7 +2,6 @@
 const NLP_API_KEY = 'AIzaSyBy9CeoxXbMk-1CNSOOBn-ATQMPP-yayMs';
 const NLP_API_URL = 'https://language.googleapis.com/v1beta2/documents:';
 const NLP_METHOD = 'annotateText';
-/*var entitiesWithEnoughSalience = [];*/
 
 
 function analyzeEntitySentiment(text){
@@ -58,10 +57,10 @@ function getEntitiesWithSalience(array) {
     salientEntities.push(array.entities[i].name)
     }
   }
-  return filterSentencesWithSalienceWords(salientEntities,array.sentences);
+  return filterSentencesWithSalientWords(salientEntities,array.sentences);
 }
 
-/*function filterSentencesWithSalienceWords(words,sentences) {
+/*function filterSentencesWithSalientWords(words,sentences) {
   let reducedText = [];
   let entitiesAlreadyUsed = [];
   for(let i=0; i < Object.keys(sentences).length; i++) {
@@ -78,16 +77,13 @@ function getEntitiesWithSalience(array) {
   return reducedText;
 }*/
 
-function filterSentencesWithSalienceWords(words,sentences) {
-  /*let reducedText = [];*/
-  /*let entitiesAlreadyUsed = [];*/
-  let reducedText = sentences.filter()
-
-  /*function callBack(sentence) {
-    return words.
-  }*/
-
-  console.log(sentences)
+function filterSentencesWithSalientWords(words,sentences) {
+  let reducedText = [];
+  sentences.forEach(sentence => words.forEach(word => {
+    if(sentence.text.content.includes(word) && !reducedText.includes(sentence.text.content)) {
+      reducedText.push(sentence.text.content);} 
+  }));
+  console.log(reducedText)
   return reducedText
 }
 
@@ -98,13 +94,23 @@ function handleAPIData(data) {
     const reducedText = getEntitiesWithSalience(data)
     for (let i=0; i < Object.keys(data.entities).length; i++) {
       if ("wikipedia_url" in data.entities[i].metadata && (data.entities[i].salience * 100) >= 1) {
-        $('.resultsList').show();
+        $('.resultsList').css('display','flex')
         $('.resultsList').append(`<li><a href="${data.entities[i].metadata.wikipedia_url}" target="_blank">${data.entities[i].name}</a></li>`)
       }
     }
+    calculateReductionPercentage(reducedText)
     $('.resultsDisplay').append(`<div>${reducedText}</div>`).val();
     console.log(data);
 }
+  
+
+  function calculateReductionPercentage(reduced) {
+    let stringReducedText = JSON.stringify(reduced).length;
+    let stringInputText = $('textarea').val().length;
+    let percentageReduced = 100 - (Math.round((stringReducedText * 100) / stringInputText));
+    $('.displayReduction').show();
+    $('.displayReduction').append(`<div>Original text reduced by ${percentageReduced}%</div>`);
+  }
 
 
 $(listenForFormSubmit);
