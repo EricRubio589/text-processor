@@ -79,64 +79,90 @@ function getEntitiesWithSalience(array) {
 
 function filterSentencesWithSalientWords(words,sentences) {
   let reducedText = [];
+  let sentencesSentiment = [];
   sentences.forEach(sentence => words.forEach(word => {
     if(sentence.text.content.includes(word) && !reducedText.includes(sentence.text.content)) {
-      reducedText.push(sentence.text.content);} 
+      reducedText.push(sentence.text.content);
+      sentencesSentiment.push(sentence.sentiment.score);}
   }));
   console.log(reducedText)
-  return reducedText
+  return [reducedText,sentencesSentiment]
 }
 
 
 //this is the function that runs after clicking on analize, it calls getEntitiesWithSalience//
 /*function listenForDisplayResultsSubmit(data) {*/
 function handleAPIData(data) {
-    const reducedText = getEntitiesWithSalience(data)
-    for (let i=0; i < Object.keys(data.entities).length; i++) {
-      if ("wikipedia_url" in data.entities[i].metadata && (data.entities[i].salience * 100) >= 1) {
-        $('.resultsList').css('display','flex')
-        $('.resultsList').append(`<li><a href="${data.entities[i].metadata.wikipedia_url}" target="_blank">${data.entities[i].name}</a></li>`)
-      }
+  const filteredSentencesAndSentiment = getEntitiesWithSalience(data);
+  const sentencesSentimentAverage = getSentencesSentimentAverage(filteredSentencesAndSentiment[1]);
+  for (let i=0; i < Object.keys(data.entities).length; i++) {
+    if ("wikipedia_url" in data.entities[i].metadata && (data.entities[i].salience * 100) >= 1) {
+      $('.resultsList').css('display','flex')
+      $('.resultsList').append(`<li><a href="${data.entities[i].metadata.wikipedia_url}" target="_blank">${data.entities[i].name}</a></li>`)
     }
-    const articleSentiment = (data.documentSentiment.score) * 10;
-    calculateReductionPercentage(reducedText);
-    displayArticleSentiment(articleSentiment);
-    $('.resultsDisplay').append(`<div>${reducedText}</div>`).val();
-    console.log(data);
+  }
+  /*const articleSentiment = (data.documentSentiment.score) * 10;*/
+  calculateReductionPercentage(filteredSentencesAndSentiment[0]);
+  displayArticleSentiment(sentencesSentimentAverage);
+  $('.resultsDisplay').append(`<div>${filteredSentencesAndSentiment[0].join(' ')}</div>`).val();
+  $('.textForm').hide();
+  console.log(filteredSentencesAndSentiment[1]);
 }
   
 
-  function calculateReductionPercentage(reduced) {
-    let stringReducedText = JSON.stringify(reduced).length;
-    let stringInputText = $('textarea').val().length;
-    let percentageReduced = 100 - (Math.round((stringReducedText * 100) / stringInputText));
-    $('.displayReduction').show();
-    $('.displayReduction').append(`<div>Original text reduced by ${percentageReduced}%</div>`);
-  }
+function calculateReductionPercentage(reduced) {
+  let stringReducedText = JSON.stringify(reduced).length;
+  let stringInputText = $('textarea').val().length;
+  let percentageReduced = 100 - (Math.round((stringReducedText * 100) / stringInputText));
+  $('.displayReduction').show();
+  $('.displayReduction').append(`<div>Original text reduced by ${percentageReduced}%</div>`);
+}
 
 
-  function displayArticleSentiment(sentimentValue) {
-    $('.gaugeImageContainer').css('display','flex');
-    if(sentimentValue === 0) {
-      $('.gaugeImageContainer').append(`<img src="media/img/gauge0.png" alt="Sentiment measurement for the analized article">`);
-      $('.gaugeImageContainer').append('<span>The article\'s sentiment is neutral</span>');
-    } else if(sentimentValue === 1 || sentimentValue === 2) {
-      $('.gaugeImageContainer').append(`<img src="media/img/gauge+1.png" alt="Sentiment measurement for the analized article">`);
-      $('.gaugeImageContainer').append('<span>The article\'s sentiment is slightly positive</span>')
-    } else if(sentimentValue === 3 || sentimentValue === 4) {
-      $('.gaugeImageContainer').append(`<img src="media/img/gauge+2.png" alt="Sentiment measurement for the analized article">`);
-      $('.gaugeImageContainer').append('<span>The article\'s sentiment is positive</span>')
-    } else if(sentimentValue === 5 || sentimentValue === 6) {
-      $('.gaugeImageContainer').append(`<img src="media/img/gauge+3.png" alt="Sentiment measurement for the analized article">`);
-      $('.gaugeImageContainer').append('<span>The article\'s sentiment is quite positive</span>')
-    } else if(sentimentValue === 7 || sentimentValue === 8) {
-      $('.gaugeImageContainer').append(`<img src="media/img/gauge+4.png" alt="Sentiment measurement for the analized article">`);
-      $('.gaugeImageContainer').append('<span>The article\'s sentiment is very positive</span>')
-    } else if(sentimentValue === 9 || sentimentValue === 10) {
-      $('.gaugeImageContainer').append(`<img src="media/img/gauge+5.png" alt="Sentiment measurement for the analized article">`);
-      $('.gaugeImageContainer').append('<span>The article\'s sentiment is extremely positive</span>')
-    }
+function displayArticleSentiment(sentimentValue) {
+  $('.gaugeImageContainer').css('display','flex');
+  if(sentimentValue === 0) {
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge0.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append('<span>The article\'s sentiment is neutral</span>');
+  } else if(sentimentValue === 1 || sentimentValue === 2) {
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge+1.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append('<span>The article\'s sentiment is slightly positive</span>')
+  } else if(sentimentValue === 3 || sentimentValue === 4) {
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge+2.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append('<span>The article\'s sentiment is positive</span>')
+  } else if(sentimentValue === 5 || sentimentValue === 6) {
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge+3.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append('<span>The article\'s sentiment is quite positive</span>')
+  } else if(sentimentValue === 7 || sentimentValue === 8) {
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge+4.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append('<span>The article\'s sentiment is very positive</span>')
+  } else if(sentimentValue === 9 || sentimentValue > 10) {
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge+5.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append('<span>The article\'s sentiment is extremely positive</span>')
+  } else if(sentimentValue === -1 || sentimentValue === -2) {
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge-1.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append('<span>The article\'s sentiment is slightly negative</span>')
+  } else if(sentimentValue === -3 || sentimentValue === -4) {
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge-2.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append('<span>The article\'s sentiment is negative</span>')
+  } else if(sentimentValue === -5 || sentimentValue === -6) {
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge-3.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append('<span>The article\'s sentiment is quite negative</span>')
+  } else if(sentimentValue === -7 || sentimentValue === -8) {
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge-4.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append('<span>The article\'s sentiment is very negative</span>')
+  } else if(sentimentValue === -9 || sentimentValue < -10) {
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge-5.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append('<span>The article\'s sentiment is extremely negative</span>')
   }
+}
+
+function getSentencesSentimentAverage(sentimentValues) {
+  let sum = sentimentValues.reduce((previous, current) => current += previous);
+  let avg = sum / sentimentValues.length;
+  console.log(sum);
+  return Math.round(avg * 10);
+}
 
 
 $(listenForFormSubmit);
