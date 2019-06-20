@@ -42,7 +42,7 @@ function analyzeEntitySentiment(text){
 }
 
 function listenForFormSubmit() {
-    $('.textForm').on('submit', function analizeProvidedText() {
+    $('.textForm').on('submit', function analyzeProvidedText() {
         event.preventDefault();
         var corpus = $('textarea').val();
         analyzeEntitySentiment(corpus);
@@ -90,7 +90,7 @@ function filterSentencesWithSalientWords(words,sentences) {
 }
 
 
-//this is the function that runs after clicking on analize, it calls getEntitiesWithSalience//
+//this is the function that runs after clicking on analyze, it calls getEntitiesWithSalience//
 /*function listenForDisplayResultsSubmit(data) {*/
 function handleAPIData(data) {
   const filteredSentencesAndSentiment = getEntitiesWithSalience(data);
@@ -122,37 +122,37 @@ function calculateReductionPercentage(reduced) {
 function displayArticleSentiment(sentimentValue) {
   $('.gaugeImageContainer').css('display','flex');
   if(sentimentValue === 0) {
-    $('.gaugeImageContainer').append(`<img src="media/img/gauge0.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge0.png" alt="Sentiment measurement for the analyzed article">`);
     $('.gaugeImageContainer').append('<span>The article\'s sentiment is neutral</span>');
   } else if(sentimentValue === 1 || sentimentValue === 2) {
-    $('.gaugeImageContainer').append(`<img src="media/img/gauge+1.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge+1.png" alt="Sentiment measurement for the analyzed article">`);
     $('.gaugeImageContainer').append('<span>The article\'s sentiment is slightly positive</span>')
   } else if(sentimentValue === 3 || sentimentValue === 4) {
-    $('.gaugeImageContainer').append(`<img src="media/img/gauge+2.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge+2.png" alt="Sentiment measurement for the analyzed article">`);
     $('.gaugeImageContainer').append('<span>The article\'s sentiment is positive</span>')
   } else if(sentimentValue === 5 || sentimentValue === 6) {
-    $('.gaugeImageContainer').append(`<img src="media/img/gauge+3.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge+3.png" alt="Sentiment measurement for the analyzed article">`);
     $('.gaugeImageContainer').append('<span>The article\'s sentiment is quite positive</span>')
   } else if(sentimentValue === 7 || sentimentValue === 8) {
-    $('.gaugeImageContainer').append(`<img src="media/img/gauge+4.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge+4.png" alt="Sentiment measurement for the analyzed article">`);
     $('.gaugeImageContainer').append('<span>The article\'s sentiment is very positive</span>')
   } else if(sentimentValue === 9 || sentimentValue > 10) {
-    $('.gaugeImageContainer').append(`<img src="media/img/gauge+5.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge+5.png" alt="Sentiment measurement for the analyzed article">`);
     $('.gaugeImageContainer').append('<span>The article\'s sentiment is extremely positive</span>')
   } else if(sentimentValue === -1 || sentimentValue === -2) {
-    $('.gaugeImageContainer').append(`<img src="media/img/gauge-1.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge-1.png" alt="Sentiment measurement for the analyzed article">`);
     $('.gaugeImageContainer').append('<span>The article\'s sentiment is slightly negative</span>')
   } else if(sentimentValue === -3 || sentimentValue === -4) {
-    $('.gaugeImageContainer').append(`<img src="media/img/gauge-2.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge-2.png" alt="Sentiment measurement for the analyzed article">`);
     $('.gaugeImageContainer').append('<span>The article\'s sentiment is negative</span>')
   } else if(sentimentValue === -5 || sentimentValue === -6) {
-    $('.gaugeImageContainer').append(`<img src="media/img/gauge-3.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge-3.png" alt="Sentiment measurement for the analyzed article">`);
     $('.gaugeImageContainer').append('<span>The article\'s sentiment is quite negative</span>')
   } else if(sentimentValue === -7 || sentimentValue === -8) {
-    $('.gaugeImageContainer').append(`<img src="media/img/gauge-4.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge-4.png" alt="Sentiment measurement for the analyzed article">`);
     $('.gaugeImageContainer').append('<span>The article\'s sentiment is very negative</span>')
   } else if(sentimentValue === -9 || sentimentValue < -10) {
-    $('.gaugeImageContainer').append(`<img src="media/img/gauge-5.png" alt="Sentiment measurement for the analized article">`);
+    $('.gaugeImageContainer').append(`<img src="media/img/gauge-5.png" alt="Sentiment measurement for the analyzed article">`);
     $('.gaugeImageContainer').append('<span>The article\'s sentiment is extremely negative</span>')
   }
 }
