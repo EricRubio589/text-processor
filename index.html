@@ -13,25 +13,26 @@
     </header>
     <form class="textForm" action="submit">
         <span>Please enter the text that you want to reduce to a more concise from</span>
-        <textarea rows = "20" name = "description">
-                Enter text here...
-             </textarea><br>
+        <textarea rows = "20" placeholder="Enter text here..."></textarea><br>
              <input class="submitButton" type = "submit" value = "Analyze" />
     </form>
-    <div class="resultsDisplayContainer">
+    <section class="resultsDisplayContainer">
+        <div class="displayReduction">
+        </div>           
         <div class="resultsDisplay">
-            <div class="displayReduction">
-            </div>           
         </div>
-        <div class="listAndMeasureContainer">
+        <section class="listAndMeasureContainer">
             <div class="resultsListContainer">
+                <h2 class="yesLinksTitle">Wikipedia links for important mentions</h2>
+                <h2 class="noLinksTitle">This text didn't produce any Wikipedia links</h2>
                 <ul class="resultsList">
                 </ul>
             </div>
             <div class="gaugeImageContainer">
             </div>
-        </div>
-    </div>
+        </section>
+        <button class="analyzeAnotherArticleButton">Analyze Another Article</button>
+    </section>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="index.js"></script>

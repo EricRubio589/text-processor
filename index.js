@@ -35,7 +35,11 @@ function analyzeEntitySentiment(text){
   .then(res => {
     if( res.ok ){
       return res.json();
+    } else
+    {
+      alert("Invalid input, please verify your source and paste again or try a different article")
     }
+
   })
 
   .then(json => handleAPIData(json));
@@ -60,23 +64,6 @@ function getEntitiesWithSalience(array) {
   return filterSentencesWithSalientWords(salientEntities,array.sentences);
 }
 
-/*function filterSentencesWithSalientWords(words,sentences) {
-  let reducedText = [];
-  let entitiesAlreadyUsed = [];
-  for(let i=0; i < Object.keys(sentences).length; i++) {
-    for (let j=0; j < words.length; j++) {
-      if (sentences[i].text.content.includes(words[j]) 
-      && !reducedText.includes(sentences[i].text.content) 
-      && !entitiesAlreadyUsed.includes(words[j])) {
-        console.log(words);
-        reducedText.push(sentences[i].text.content);
-        entitiesAlreadyUsed.push(words[j]);
-      }
-    }  
-  } 
-  return reducedText;
-}*/
-
 function filterSentencesWithSalientWords(words,sentences) {
   let reducedText = [];
   let sentencesSentiment = [];
@@ -95,21 +82,28 @@ function filterSentencesWithSalientWords(words,sentences) {
 function handleAPIData(data) {
   const filteredSentencesAndSentiment = getEntitiesWithSalience(data);
   const sentencesSentimentAverage = getSentencesSentimentAverage(filteredSentencesAndSentiment[1]);
+  let linksAvailable =0;
   for (let i=0; i < Object.keys(data.entities).length; i++) {
     if ("wikipedia_url" in data.entities[i].metadata && (data.entities[i].salience * 100) >= 1) {
+      $('.yesLinksTitle').css('display','flex');
       $('.resultsList').css('display','flex')
       $('.resultsList').append(`<li><a href="${data.entities[i].metadata.wikipedia_url}" target="_blank">${data.entities[i].name}</a></li>`)
+      linksAvailable +=1;
+    }
+    if (linksAvailable <1) { 
+      $('.noLinksTitle').css('display','flex');
     }
   }
-  /*const articleSentiment = (data.documentSentiment.score) * 10;*/
   calculateReductionPercentage(filteredSentencesAndSentiment[0]);
+  const sentencesWithLineBreaks = addLineBreaksToSentences(filteredSentencesAndSentiment[0]);
   displayArticleSentiment(sentencesSentimentAverage);
-  $('.resultsDisplay').append(`<div>${filteredSentencesAndSentiment[0].join(' ')}</div>`).val();
+  $('.resultsDisplay').append(`<div>${sentencesWithLineBreaks.join(' ')}</div>`).val();
   $('.textForm').hide();
-  console.log(filteredSentencesAndSentiment[1]);
+  $('.analyzeAnotherArticleButton').css('display','flex');
+  console.log(sentencesWithLineBreaks);
 }
   
-
+//With this function we calculate the percentage of reduction in the text that's returned to the user//
 function calculateReductionPercentage(reduced) {
   let stringReducedText = JSON.stringify(reduced).length;
   let stringInputText = $('textarea').val().length;
@@ -157,6 +151,25 @@ function displayArticleSentiment(sentimentValue) {
   }
 }
 
+//This function returns the application to a state where the user can analyze a different article//
+function listenForAnalyzeAnotherArticleButton() {
+  $('.analyzeAnotherArticleButton').on('click', function analyzeAnotherArticle() {
+    event.preventDefault();
+    console.log('analyze another article is working');
+  $('.analyzeAnotherArticleButton').hide();
+  $('.textForm').css('display','flex');
+  $('.textForm textarea').val('');
+  $('.resultsDisplay').css('display','flex');
+  $('.resultsDisplay').empty();
+  $('.resultsList').empty();
+  $('.displayReduction').empty();
+  $('.gaugeImageContainer').empty();
+  $('.noLinksTitle').hide();
+  $('.yesLinksTitle').hide();
+  })
+}
+
+// We get the average sentiment value from the sentences that we are using on our return text. //
 function getSentencesSentimentAverage(sentimentValues) {
   let sum = sentimentValues.reduce((previous, current) => current += previous);
   let avg = sum / sentimentValues.length;
@@ -165,4 +178,16 @@ function getSentencesSentimentAverage(sentimentValues) {
 }
 
 
+//With this function we add line breaks to create paragraphs so that the return text is easier to read.//
+function addLineBreaksToSentences(sentences) {
+  for (let i=0; i < sentences.length; i++ ) {
+    if (i % 5 === 0) {
+      sentences.splice( i , 0, '<br><br><br>');
+    }
+  }
+  return sentences;
+}
+
+
 $(listenForFormSubmit);
+$(listenForAnalyzeAnotherArticleButton);

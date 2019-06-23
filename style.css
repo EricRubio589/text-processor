@@ -17,6 +17,15 @@ form {
     justify-content: center;
 }
 
+.textForm textarea {
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+.textForm span {
+    font-size: 20px;
+}
+
 input {
     width: 50%;
     margin-top: 15px;
@@ -44,14 +53,6 @@ textarea {
     justify-content: center;
 }
 
-/*.displayResultsButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-    height: 50px;
-}*/
-
 .resultsDisplay {
     margin-top: 20px;
 }
@@ -65,8 +66,17 @@ textarea {
 .resultsListContainer {
     width: 50%;
     display: flex;
+    flex-flow: column;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 5px;
+}
+
+.noLinksTitle {
+    display: none;
+}
+
+.yesLinksTitle {
+    display: none;
 }
 
 .resultsList {
@@ -94,4 +104,14 @@ textarea {
     max-width: 150px;
     height: auto;
     margin-bottom: 15px;
+}
+
+.analyzeAnotherArticleButton {
+    display: none;
+    margin-bottom: 50px;
+    width: 50%;
+    height: 50px;
+    margin-top: 15px;
+    text-align: center;
+    justify-content: center;
 }
