@@ -82,6 +82,7 @@ function filterSentencesWithSalientWords(words,sentences) {
 function handleAPIData(data) {
   const filteredSentencesAndSentiment = getEntitiesWithSalience(data);
   const sentencesSentimentAverage = getSentencesSentimentAverage(filteredSentencesAndSentiment[1]);
+  $('.resultsListContainer').css('display','flex');
   let linksAvailable =0;
   for (let i=0; i < Object.keys(data.entities).length; i++) {
     if ("wikipedia_url" in data.entities[i].metadata && (data.entities[i].salience * 100) >= 1) {
@@ -97,6 +98,7 @@ function handleAPIData(data) {
   calculateReductionPercentage(filteredSentencesAndSentiment[0]);
   const sentencesWithLineBreaks = addLineBreaksToSentences(filteredSentencesAndSentiment[0]);
   displayArticleSentiment(sentencesSentimentAverage);
+  $('.resultsDisplay').css('display','flex');
   $('.resultsDisplay').append(`<div>${sentencesWithLineBreaks.join(' ')}</div>`).val();
   $('.textForm').hide();
   $('.analyzeAnotherArticleButton').css('display','flex');
@@ -159,10 +161,12 @@ function listenForAnalyzeAnotherArticleButton() {
   $('.analyzeAnotherArticleButton').hide();
   $('.textForm').css('display','flex');
   $('.textForm textarea').val('');
-  $('.resultsDisplay').css('display','flex');
+  $('.resultsDisplay').hide();
   $('.resultsDisplay').empty();
   $('.resultsList').empty();
   $('.displayReduction').empty();
+  $('.resultsListContainer').hide();
+  $('.gaugeImageContainer').hide();
   $('.gaugeImageContainer').empty();
   $('.noLinksTitle').hide();
   $('.yesLinksTitle').hide();
@@ -180,7 +184,7 @@ function getSentencesSentimentAverage(sentimentValues) {
 
 //With this function we add line breaks to create paragraphs so that the return text is easier to read.//
 function addLineBreaksToSentences(sentences) {
-  for (let i=0; i < sentences.length; i++ ) {
+  for (let i=1; i < sentences.length; i++ ) {
     if (i % 5 === 0) {
       sentences.splice( i , 0, '<br><br><br>');
     }

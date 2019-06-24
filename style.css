@@ -53,8 +53,13 @@ textarea {
     justify-content: center;
 }
 
+
 .resultsDisplay {
-    margin-top: 20px;
+    display: none;
+    padding: 20px;
+    background-color: white;
+    border: solid 2px black;
+    color: black;
 }
 
 .listAndMeasureContainer {
@@ -65,10 +70,12 @@ textarea {
 
 .resultsListContainer {
     width: 50%;
-    display: flex;
+    display: none;
     flex-flow: column;
-    justify-content: center;
-    margin-top: 5px;
+    align-items: center;
+    background-color: white;
+    border: solid 2px black;
+    color: black;
 }
 
 .noLinksTitle {
@@ -86,18 +93,20 @@ textarea {
 .displayReduction {
     display: none;
     font-size: 25px;
-    margin-bottom: 25px;
     flex-flow: row;
 }
 
 .gaugeImageContainer {
     display: none;
     width: 50%;
-    margin-top:30px;
-    margin-bottom: 30px;
+    padding-top:30px;
+    padding-bottom: 30px;
     flex-flow: column;
     justify-content: center;
     align-items: center;
+    background-color: white;
+    border: solid 2px black;
+    color: black;
 }
 
 .gaugeImageContainer img {
