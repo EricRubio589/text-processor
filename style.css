@@ -1,6 +1,7 @@
 body {
-    background-color: darkslategray;
-    color: white;
+    background-image: url("media/bkgd/roughcloth.png");
+    color: black;
+    font-family: 'Playball', cursive;
 }
 
 header h1 {
@@ -58,8 +59,10 @@ textarea {
     display: none;
     padding: 20px;
     background-color: white;
-    border: solid 2px black;
+    /*background-image: url("media/bkgd/cardboard.png");*/
+    border: solid 6px white;
     color: black;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .listAndMeasureContainer {
@@ -73,9 +76,11 @@ textarea {
     display: none;
     flex-flow: column;
     align-items: center;
-    background-color: white;
-    border: solid 2px black;
+    /*background-color: white;*/
+    background-image: url("media/bkgd/cardboard.png");
+    border: solid 6px white;
     color: black;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .noLinksTitle {
@@ -104,9 +109,11 @@ textarea {
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    background-color: white;
-    border: solid 2px black;
+    /*background-color: white;*/
+    background-image: url("media/bkgd/cardboard.png");
+    border: solid 6px white;
     color: black;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .gaugeImageContainer img {
