@@ -91,10 +91,10 @@ function handleAPIData(data) {
       $('.resultsList').append(`<li><a href="${data.entities[i].metadata.wikipedia_url}" target="_blank">${data.entities[i].name}</a></li>`)
       linksAvailable +=1;
     }
+  }
     if (linksAvailable <1) { 
       $('.noLinksTitle').css('display','flex');
     }
-  }
   calculateReductionPercentage(filteredSentencesAndSentiment[0]);
   const sentencesWithLineBreaks = addLineBreaksToSentences(filteredSentencesAndSentiment[0]);
   displayArticleSentiment(sentencesSentimentAverage);

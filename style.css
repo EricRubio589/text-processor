@@ -99,6 +99,7 @@ textarea {
     display: none;
     font-size: 25px;
     flex-flow: row;
+    margin: 15px 0px;
 }
 
 .gaugeImageContainer {
