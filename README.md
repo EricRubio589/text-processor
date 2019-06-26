@@ -7,4 +7,4 @@ to the article's most important mentions.
 
 This is the main page of the application, where the user feeds the raw article to be analyzed.
 ![Main Page](/media/img/newsanalyzermain.png)
-Format: ![Alt Text](This is the view of the main page of the application, showing the text box where the user enters the article)
+Format: ![This is the view of the main page of the application, showing the text box where the user enters the article](url)
