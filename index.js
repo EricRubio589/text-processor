@@ -48,6 +48,7 @@ function listenForFormSubmit() {
         event.preventDefault();
         var corpus = $('textarea').val();
         analyzeEntitySentiment(corpus);
+        $('.submitButton').hide();
     })
 
 }
@@ -143,6 +144,7 @@ function listenForAnalyzeAnotherArticleButton() {
     event.preventDefault();
   $('.analyzeAnotherArticleButton').hide();
   $('.textForm').css('display','flex');
+  $('.submitButton').show();
   $('.textForm textarea').val('');
   $('.resultsDisplay').hide();
   $('.resultsDisplay').empty();
