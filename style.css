@@ -3,6 +3,7 @@ body {
     color: white;
     background-size: cover;
     font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
 }
 
 header h1 {
@@ -10,7 +11,7 @@ header h1 {
     font-family: 'Playball', cursive;
     align-items: center;
     justify-content: center;
-    font-size: 50px;
+    font-size: 25px;
     text-shadow: 4px 4px 2px black, 2px 2px 2px black, 6px 6px 2px black;
 }
 
@@ -23,30 +24,34 @@ form {
 
 .textForm textarea {
     margin-top: 15px;
-    width: 50%;
+    width: 75%;
     font-size: 15px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    padding: 20px;
+    padding: 10px;
 }
 
 .textForm span {
-    font-size: 25px;
-    text-shadow: 4px 4px 2px black, 2px 2px 2px black, 6px 6px 2px black;
+    font-size: 15px;
+    padding: 2px 20px;
+    /*background: rgba(0,0,0,0.3);*/
+    text-shadow: 4px 4px 2px black, 2px 2px 2px black, 6px 6px 2px black,
+    3px 3px 4px black, 1px 1px 4px black, 5px 5px 4px black,
+    -2px 3px 4px black, -2px 1px 4px black, -2px 5px 4px black;
 }
 
 .submitButton {
-    width: 25%;
+    width: 50%;
     height: 50px;
-    margin-top: 25px;
+    margin-top: 10px;
     box-shadow: 3px 5px rgb(122,112,102);
     font-family: 'Playball', cursive;
-    font-size: 25px;
+    font-size: 15px;
 }
 
 
 .resultsDisplayContainer {
     margin-top: 15px;
-    width: 50%;
+    width: 75%;
     display: flex;
     flex-flow: column;
     margin-left: auto;
@@ -55,32 +60,39 @@ form {
     justify-content: center;
 }
 
+.resultsListContainer h2 {
+    font-size: 15px;
+    justify-content: center;
+}
 
 .resultsDisplay {
     display: none;
-    padding: 20px;
+    padding: 5px;
     background-image: url("media/bkgd/cardboard.png");
-    border: solid 6px rgb(122,112,102);
+    border: solid 4px rgb(122,112,102);
     color: black;
+    font-size: 12px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .listAndMeasureContainer {
     display: flex;
-    flex-flow: row;
+    flex-flow: column;
     width: 100%;
 }
 
 .resultsListContainer {
-    width: 50%;
+    box-sizing: border-box;
+    width: 100%;
     display: none;
     flex-flow: column;
     align-items: center;
-    padding: 30px;
+    padding: 5px;
     background-image: url("media/bkgd/cardboard.png");
-    border: solid 6px rgb(122,112,102);
-    border-right: solid 3px rgb(122,112,102);
+    border: solid 4px rgb(122,112,102);
+    border-bottom: solid 2px rgb(122,112,102);
     color: black;
+    font-size: 10px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
@@ -96,49 +108,329 @@ form {
 
 .resultsList {
     flex-flow: column;
+    padding-left: 0;
 }
 
 .displayReduction {
     display: none;
-    font-size: 25px;
+    font-size: 15px;
     flex-flow: row;
     margin: 15px 0px;
-    text-shadow: 4px 4px 2px black, 2px 2px 2px black, 6px 6px 2px black;
+    text-shadow: 4px 4px 2px black, 2px 2px 2px black, 6px 6px 2px black,
+    3px 3px 4px black, 1px 1px 4px black, 5px 5px 4px black,
+    -2px 3px 4px black, -2px 1px 4px black, -2px 5px 4px black;
 }
 
 .gaugeImageContainer {
+    box-sizing: border-box;
     display: none;
-    width: 50%;
-    padding: 30px;
+    width: 100%;
+    padding: 5px;
     flex-flow: column;
     justify-content: center;
     align-items: center;
     background-image: url("media/bkgd/cardboard.png");
-    border: solid 6px rgb(122,112,102);
-    border-left: solid 3px rgb(122,112,102);
+    border: solid 4px rgb(122,112,102);
+    border-top: solid 3px rgb(122,112,102);
     color: black;
+    font-size: 10px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .gaugeImageContainer h2 {
     margin-top: 0;
+    font-size: 15px;
+    justify-content: center;
 }
 
 .gaugeImageContainer img {
-    max-height: 150px;
-    width: auto;
-    margin-bottom: 15px;
+    width: 100%;
+    max-width: 100px;
+    height: auto;
+    padding-bottom: 10px;
 }
 
 .analyzeAnotherArticleButton {
     display: none;
     margin-bottom: 25px;
-    width: 50%;
+    width: 75%;
     height: 50px;
     margin-top: 25px;
     justify-content: center;
     align-items: center;
     box-shadow: 3px 5px rgb(122,112,102);
     font-family: 'Playball', cursive;
-    font-size: 25px;
+    font-size: 15px;
+}
+
+/* window size 400px up to 700px */
+
+@media screen and (min-width: 400px) { 
+    
+    header h1 {
+        font-size: 35px;
+    }
+    
+    .textForm span {
+        font-size: 18px;
+        padding: 2px 20px;
+    }
+
+    .textForm textarea {
+        margin-top: 5px;
+        width: 75%;
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    .submitButton {
+        width: 50%;
+        height: 50px;
+        margin-top: 25px;
+        font-size: 25px;
+    }
+
+    .resultsDisplayContainer {
+        margin-top: 15px;
+        width: 75%;
+    }
+    
+    .resultsListContainer {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 5px;
+        border: solid 4px rgb(122,112,102);
+        border-bottom: solid 3px rgb(122,112,102);
+        font-size: 18px;
+    }
+    
+    .resultsListContainer h2 {
+        font-size: 20px;
+        justify-content: center;
+    }
+    
+    .gaugeImageContainer h2 {
+        font-size: 20px;
+        justify-content: center;
+    }
+    
+    .resultsList {
+        padding-left: 0;
+    }
+    
+    .gaugeImageContainer {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 5px;
+        border: solid 4px rgb(122,112,102);
+        border-top: solid 2px rgb(122,112,102);
+        font-size: 15px;
+    }
+
+    .gaugeImageContainer img {
+        width: 100%;
+        max-width: 150px;
+        height: auto;
+        padding-bottom: 10px;
+    }
+    
+    .listAndMeasureContainer {
+        flex-flow: column;
+        width: 100%;
+    }
+
+    .displayReduction {
+        font-size: 20px;
+    }
+
+    .resultsDisplay {
+        padding: 15px;
+        border: solid 4px rgb(122,112,102);
+        font-size: 18px;
+    }
+
+    .analyzeAnotherArticleButton {
+        margin-bottom: 25px;
+        width: 75%;
+        height: 50px;
+        margin-top: 25px;
+        font-size: 20px;
+    }
+}
+
+/* window size 700px up to 1024px */
+@media screen and (min-width: 700px) { 
+    
+    header h1 {
+        font-size: 50px;
+    }
+
+    .textForm span {
+        font-size: 20px;
+        padding: 2px 20px;
+    }
+
+    .textForm textarea {
+        margin-top: 5px;
+        width: 75%;
+        font-size: 15px;
+        padding: 20px;
+    }
+
+    .submitButton {
+        width: 50%;
+        height: 50px;
+        margin-top: 25px;
+        font-size: 25px;
+    }
+
+    .resultsDisplayContainer {
+        margin-top: 15px;
+        width: 75%;
+    }
+    
+    .resultsListContainer {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 5px;
+        border: solid 4px rgb(122,112,102);
+        border-bottom: solid 3px rgb(122,112,102);
+        font-size: 18px;
+    }
+    
+    .resultsListContainer h2 {
+        font-size: 20px;
+        justify-content: center;
+    }
+    
+    .gaugeImageContainer h2 {
+        font-size: 20px;
+        justify-content: center;
+    }
+    
+    .resultsList {
+        padding-left: 0;
+    }
+    
+    .gaugeImageContainer {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 5px;
+        border: solid 4px rgb(122,112,102);
+        border-top: solid 2px rgb(122,112,102);
+        font-size: 15px;
+    }
+
+    .gaugeImageContainer img {
+        width: 100%;
+        max-width: 150px;
+        height: auto;
+        padding-bottom: 10px;
+    }
+    
+    .listAndMeasureContainer {
+        flex-flow: column;
+        width: 100%;
+    }
+
+    .displayReduction {
+        font-size: 25px;
+    }
+
+    .resultsDisplay {
+        padding: 20px;
+        border: solid 4px rgb(122,112,102);
+        font-size: 18px;
+    }
+
+    .analyzeAnotherArticleButton {
+        margin-bottom: 25px;
+        width: 75%;
+        height: 50px;
+        margin-top: 25px;
+        font-size: 25px;
+    }
+}
+
+/* window size 1024px and larger */
+@media screen and (min-width: 1024px) { 
+    
+    header h1 {
+        font-size: 50px;
+    }
+
+    .textForm textarea {
+        margin-top: 5px;
+        width: 50%;
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    .textForm span {
+        font-size: 25px;
+        padding: 2px 5px;
+    }
+
+    .submitButton {
+        width: 50%;
+        height: 50px;
+        margin-top: 25px;
+        font-size: 25px;
+    }
+
+    .resultsDisplayContainer {
+        margin-top: 15px;
+        width: 50%;
+    }
+    
+    .resultsListContainer {
+        box-sizing: border-box;
+        width: 50%;
+        padding: 5px;
+        border: solid 6px rgb(122,112,102);
+        border-right: solid 3px rgb(122,112,102);
+        font-size: 18px;
+    }
+    
+    .resultsListContainer h2 {
+        font-size: 20px;
+        justify-content: center;
+    }
+    
+    .gaugeImageContainer h2 {
+        font-size: 20px;
+        justify-content: center;
+    }
+    
+    .gaugeImageContainer {
+        box-sizing: border-box;
+        width: 50%;
+        padding: 5px;
+        border: solid 6px rgb(122,112,102);
+        border-left: solid 3px rgb(122,112,102);
+        font-size: 15px;
+    }
+
+    .gaugeImageContainer img {
+        width: 100%;
+        max-width: 150px;
+        height: auto;
+        padding-bottom: 10px;
+    }
+    
+    .listAndMeasureContainer {
+        flex-flow: row;
+        width: 100%;
+    }
+
+    .resultsDisplay {
+        border: solid 6px rgb(122,112,102);
+    }
+
+    .analyzeAnotherArticleButton {
+        width: 50%;
+        height: 50px;
+        margin-bottom: 30px;
+        margin-top: 30px;
+    }
 }

@@ -141,7 +141,6 @@ function displayArticleSentiment(sentimentValue) {
 function listenForAnalyzeAnotherArticleButton() {
   $('.analyzeAnotherArticleButton').on('click', function analyzeAnotherArticle() {
     event.preventDefault();
-    console.log('analyze another article is working');
   $('.analyzeAnotherArticleButton').hide();
   $('.textForm').css('display','flex');
   $('.textForm textarea').val('');
