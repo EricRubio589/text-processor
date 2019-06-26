@@ -143,10 +143,9 @@ form {
 }
 
 .gaugeImageContainer img {
-    width: 100%;
-    max-width: 100px;
-    height: auto;
-    padding-bottom: 10px;
+    height: 100px;
+    width: 100px;
+    margin-bottom: 15px;
 }
 
 .analyzeAnotherArticleButton {
@@ -227,10 +226,9 @@ form {
     }
 
     .gaugeImageContainer img {
-        width: 100%;
-        max-width: 150px;
-        height: auto;
-        padding-bottom: 10px;
+        height: 130px;
+        width: 130px;
+        margin-bottom: 20px;
     }
     
     .listAndMeasureContainer {
@@ -321,10 +319,8 @@ form {
     }
 
     .gaugeImageContainer img {
-        width: 100%;
-        max-width: 150px;
-        height: auto;
-        padding-bottom: 10px;
+        height: 150px;
+        width: 150px;
     }
     
     .listAndMeasureContainer {
@@ -408,13 +404,6 @@ form {
         border: solid 6px rgb(122,112,102);
         border-left: solid 3px rgb(122,112,102);
         font-size: 15px;
-    }
-
-    .gaugeImageContainer img {
-        width: 100%;
-        max-width: 150px;
-        height: auto;
-        padding-bottom: 10px;
     }
     
     .listAndMeasureContainer {
