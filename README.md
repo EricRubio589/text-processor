@@ -1,4 +1,4 @@
-News Analyzer
+# News Analyzer
 
 [News Analyzer link](https://ericrubio589.github.io/text-processor/)
 
@@ -23,3 +23,6 @@ Here's how the results are displayed after the analysis.
 
 
 The Technology used for this application is (HTML/CSS/JavaScript/jQuery).
+
+This application was created by Eric Rubio @EricRubio589.
+Background image by (https://www.flickr.com/photos/ghb624/7809628260/).
