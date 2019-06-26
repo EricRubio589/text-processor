@@ -19,7 +19,7 @@ This is the main page of the application, where the user feeds the raw article t
 
 
 Here's how the results are displayed after the analysis.
-![Results Page](/media/img/newsanalyzerresults.png)
+![Results Page](/media/img/newsanalyzerresults.jpg)
 
 
 The Technology used for this application is (HTML/CSS/JavaScript/jQuery).
