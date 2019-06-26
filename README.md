@@ -14,15 +14,16 @@ In the sentiment measure section, what the user gets, is a reading of objectivit
 determine if the actual information is of negative or positive nature, this means that if an article gets a reading of negative
 sentiment we can assume that this is the way the news was reported rather than the article being negative in nature.
 
-This is the main page of the application, where the user feeds the raw article to be analyzed.
+This is the main page of the application, where the user feeds the raw article to be analyzed:
 ![Main Page](/media/img/newsanalyzermain.png)
 
 
-Here's how the results are displayed after the analysis.
+Here's how the results are displayed after the analysis:
 ![Results Page](/media/img/newsanalyzerresults.jpg)
 
 
 The Technology used for this application is (HTML/CSS/JavaScript/jQuery).
 
 This application was created by Eric Rubio @EricRubio589.
-Background image by (https://www.flickr.com/photos/ghb624/7809628260/).
+
+Background image by jer*ry (https://www.flickr.com/photos/ghb624/).
