@@ -83,7 +83,7 @@ function handleAPIData(data) {
 
 //These two functions work in conjuction as when the first one is called from handleAPIData it gets the values //
 //for the entities with the most salience and then it passed that array to be compared with the sentences on   //
-//filterSentencesWithSalientWords and this last one returns the sentences that contain those salient entities  //                                                                                                                                //
+//filterSentencesWithSalientWords and this last one returns the sentences that contain those salient entities.  //                                                                                                                                //
 function getEntitiesWithSalience(array) {
   let salientEntities = [];
   for (let i=0; i < Object.keys(array.entities).length; i++ ) {
